@@ -37,13 +37,70 @@ If you want to dig in deeper, you can find the source code on [GitHub](https://g
 
 ## Significant History Cleanup Performance Improvements
 
-* Nice Chart ;)
-* Short explanation and how to enable it
+So far, the history cleanup was implemented in a way, that it could only be run in one thread. This guaranteed, that the history cleanup process 
+does not overload too much the application server and the database and does not have significant impact on the process engine performance. 
+However, it can happen, that history cleanup is configured to be run only at nights and at night the application is not used, thus nobody cares about the process engine performance.
+In such cases, you can now parallelize the history cleanup process, by defining **degree of parallelism**, which st the end means the possible number of threads, 
+simultaneously performing the cleanup.
+
+Below you can see the comparison of history cleanup performance in case you run it in one or in three threads.
+
+The test was performed on the engine running on normal PC and Oracle 12 as a database.
+
+{{< figure class="main teaser no-border" src="history-cleanup-number.png">}}
+
+{{< figure class="main teaser no-border" src="history-cleanup-number-per-sec.png">}} 
+
+In order to enable the feature, you should define the `historyCleanupDegreeOfParallelism` configuration parameter. For more information check 
+[the docs](https://docs.camunda.org/manual/7.9/reference/deployment-descriptors/tags/process-engine/#history-cleanup-configuration-parameters)
 
 ## Transient Variables
+ 
+Various data, accompanying the process flow, is usually stored as process variables. But it is often the case, that there is some raw input data 
+(huge XML or JSON file or similar), which must be preprocessed before being used in the process. Before version 7.9 you had to choose: either preprocess it "outside" 
+the process and then pass the extracted granular process variables to the engine, or to implement "data processing" step inside the process, which forced you
+to pass the whole raw data as a process variable. This means that it would be stored in the database and even if you later remove the variable, it would still 
+remain in history tables.
 
-* why? what is the use case?
-* how to use it? link to docs + rest api
+This problem can now be solved with the help of transient variables. You can pass the transient variable to the process and be sure that it 
+will never be saved in the database. Though, it will be accessible as a normal variable till the next database transaction commit.
+
+Imaging such process:
+
+{{< figure class="main teaser no-border" src="transient_variables.png" >}}
+  
+You can start it with this REST call:
+```test
+POST /message
+
+{
+  "messageName" : "supportRequest",
+  "processVariables" : {
+    "requestData" : { 
+      "value" : "[huge JSON content here]", 
+      "type": "String"
+      "valueInfo": {
+        "transient": true
+      }
+    }
+  }
+}
+
+```
+or via Java API:
+
+```java
+runtimeService.createMessageCorrelation("supportRequest")
+      //true in the second parameter indicates transient variable
+      .setVariable("requestData", Variables.stringValue("huge JSON content here", true))      
+      .correlate();
+```
+
+Message correlation will start the new process instance, then the service task "Extract client data" will be executed, where passed variable can be used to extract
+ client id and another data. After that the database transaction will be committed (as the process has reached the waiting state), saving client id and other data in dedicated variables, 
+ but `requestData` will cease to exist.
+
+More information on usage of transient variables can be found in [the docs](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#transient-variables).
 
 ## Docker Container for Camunda BPM Platform Enterprise
 
