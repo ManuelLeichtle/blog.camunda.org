@@ -34,8 +34,8 @@ If you want to dig in deeper, you can find the source code on [GitHub](https://g
 
 ## Clients for External Tasks
 
-In case you have your projects working in microservices arcitecture, you can (and probably do) use Camunda BPM Platform as an orchestration engine, specifically 
- external tasks. Now we provide clients for external tasks, which can be embedded in other applications and simplify significantly dealing with external tasks 
+In case you have your projects working in microservices arcitecture, you can (and probably do) use Camunda BPM Platform as an orchestration engine. External tasks are the excellent
+choice for such use case. Now we provide clients for external tasks, which can be embedded in other applications and simplify significantly dealing with external tasks 
  in Camunda BPM Platform context.
  
 We provide two of them now:
@@ -50,30 +50,30 @@ You can find Get stared guide [here](https://docs.camunda.org/get-started/quick-
 So far, the history cleanup was implemented in a way, that it could only be run in one thread. This guaranteed, that the history cleanup process 
 does not overload too much the application server and the database and does not have significant impact on the process engine performance. 
 However, it can happen, that history cleanup is configured to be run only at nights and at night the application is not used, thus nobody cares about the process engine performance.
-In such cases, you can now parallelize the history cleanup process, by defining **degree of parallelism**, which st the end means the possible number of threads, 
+In such cases, you can now parallelize the history cleanup process, by defining **degree of parallelism**, which at the end means the possible number of threads, 
 simultaneously performing the cleanup.
 
 Below you can see the comparison of history cleanup performance in case you run it in one or in three threads.
 
-()The test was performed on the engine running on normal PC and Oracle 12 as a database.)
+(The test was performed on the engine running on normal PC and Oracle 12 as a database)
 
 {{< figure class="main teaser no-border" src="history-cleanup-number.png">}}
 
 {{< figure class="main teaser no-border" src="history-cleanup-number-per-sec.png">}} 
 
-In order to enable the feature, you should define the `historyCleanupDegreeOfParallelism` configuration parameter. For more information check 
-[the docs](https://docs.camunda.org/manual/7.9/reference/deployment-descriptors/tags/process-engine/#history-cleanup-configuration-parameters)
+In order to enable the feature, you should define the `historyCleanupDegreeOfParallelism` configuration parameter. For more information, please, check 
+[the docs](https://docs.camunda.org/manual/7.9/reference/deployment-descriptors/tags/process-engine/#history-cleanup-configuration-parameters).
 
 ## Transient Variables
  
 Various data, accompanying the process flow, is usually stored as process variables. But it is often the case, that there is some raw input data 
 (huge XML or JSON file or similar), which must be preprocessed before being used in the process. Before version 7.9 you had to choose: either preprocess it "outside" 
-the process and then pass the extracted granular process variables to the engine, or to implement "data processing" step inside the process, which forced you
+the process and then pass the extracted granular process variables to the engine, or to implement "data processing" step inside the process. The latter forced you
 to pass the whole raw data as a process variable. This means that it would be stored in the database and even if you later remove the variable, it would still 
 remain in history tables.
 
 This problem can now be solved with the help of transient variables. You can pass the transient variable to the process and be sure that it 
-will never be saved in the database. Though, it will be accessible as a normal variable till the next database transaction commit.
+will never be persisted in the database. Though, it will be accessible as a normal variable till the next database transaction commit.
 
 Imaging such process:
 
@@ -112,6 +112,10 @@ Message correlation will start the new process instance, then the service task "
 
 More information on usage of transient variables can be found in [the docs](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#transient-variables).
 
+## More BPMN features
+
+Another super useful features, Camunda now provide, are: [Conditional start events](https://docs.camunda.org/manual/latest/reference/bpmn20/events/conditional-events/#conditional-start-event) and [sending a payload when throwing a signal](https://docs.camunda.org/manual/7.9/reference/bpmn20/events/signal-events/#passing-variables). 
+
 ## Docker Container for Camunda BPM Platform Enterprise
 
 Docker Container for enterprise edition of Camunda BPM Platform is now available. Check the docs [here](https://stage.docs.camunda.org/manual/7.9/installation/docker/).
@@ -140,7 +144,7 @@ There are many more smaller features and bugfixes in the release which aren't pr
 
 ## Register for the Webinar
 
-If you have not already, make sure to place a last-minute registration for the free release webinars - [German](TODO) and [English](TODO).
+If you have not already, make sure to place a last-minute registration for the free release webinars - [German](https://register.gotowebinar.com/register/9024933668296248067) and [English](https://register.gotowebinar.com/register/1731630049188274947).
 
 ## Your Feedback Matters!
 
