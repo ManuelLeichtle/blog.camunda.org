@@ -10,19 +10,22 @@ title = "Camunda 7.9.0 Released"
 Camunda BPM platform 7.9.0 is released and the highlights are:
 
 <!-- FEATURES LIST BEGINS -->
-* First feature
-* Second feature
-* Third feature
-* [XX Fixes]()
+* Clients for External Tasks
+* History Cleanup Performance Improvements
+* Transient Variables
+* New Features in Camunda Cockpit
+* [119 Bug Fixes](https://app.camunda.com/jira/browse/CAM-9093?jql=issuetype%20%3D%20%22Bug%20Report%22%20AND%20fixVersion%20%3D%207.9.0)
 <!-- FEATURES LIST ENDS -->
+
+<!--more-->
 
 In addition, Wildfly 11, JBoss EAP 7.1, Tomcat 9, and the database Maria DB 10.2 are now officially supported.
 
 You can [Download Camunda for free](https://camunda.com/download/) (click on Preview Release) or [Run it with Docker](https://hub.docker.com/r/camunda/camunda-bpm-platform/).
 
-We have also released the Camunda Spring Boot Starter 3.0.0 (TODO: link to BLOG POST), which relies on Spring Boot 2.0.0 by default.
+We have also released the Camunda Spring Boot Starter 3.0.0, which relies on Spring Boot 2.0.0 by default.
 
-To see a full list of the changes, please check out our [Release Notes](https://app.camunda.com/jira/secure/ReleaseNote.jspa?projectId=10230&version=15301)
+To see a full list of the changes, please check out our [Release Notes](https://app.camunda.com/jira/secure/ReleaseNote.jspa?projectId=10230&version=15096)
 and the list of [Known Issues](https://app.camunda.com/jira/issues/?jql=affectedVersion%20%3D%207.9.0).
 
 If you want to dig in deeper, you can find the source code on [GitHub](https://github.com/camunda/camunda-bpm-platform/releases/tag/7.9.0).
@@ -31,9 +34,16 @@ If you want to dig in deeper, you can find the source code on [GitHub](https://g
 
 ## Clients for External Tasks
 
-* Non-Java-developers can implement their service task in NodeJS
-* in addition their exists a java client that can be embedded
-* link to quickstarts that shows how to install and use clients
+In case you have your projects working in microservices arcitecture, you can (and probably do) use Camunda BPM Platform as an orchestration engine, specifically 
+ external tasks. Now we provide clients for external tasks, which can be embedded in other applications and simplify significantly dealing with external tasks 
+ in Camunda BPM Platform context.
+ 
+We provide two of them now:
+
+* [NodeJS external task client](https://github.com/camunda/camunda-external-task-client-js) for non-Java developers
+* [Java external task client](https://github.com/camunda/camunda-external-task-client-java) - can be embedded in Java applications
+
+You can find Get stared guide [here](https://docs.camunda.org/get-started/quick-start/)
 
 ## Significant History Cleanup Performance Improvements
 
@@ -45,7 +55,7 @@ simultaneously performing the cleanup.
 
 Below you can see the comparison of history cleanup performance in case you run it in one or in three threads.
 
-The test was performed on the engine running on normal PC and Oracle 12 as a database.
+()The test was performed on the engine running on normal PC and Oracle 12 as a database.)
 
 {{< figure class="main teaser no-border" src="history-cleanup-number.png">}}
 
@@ -104,24 +114,29 @@ More information on usage of transient variables can be found in [the docs](http
 
 ## Docker Container for Camunda BPM Platform Enterprise
 
-* link to docs
+Docker Container for enterprise edition of Camunda BPM Platform is now available. Check the docs [here](https://stage.docs.camunda.org/manual/7.9/installation/docker/).
 
 ## New Features in Camunda Cockpit
 
 ### Sortable Columns
 
-* a gif showing how to use it
+This release brings another improvement to facilitate dealing with large amounts of data: most tables in Cockpit and Admin can now be sorted based on various criteria. 
+Moreover, sorting order is persisted, so that the user does not need to repeat sorting each type they open some view.
+
+{{< figure class="teaser" src="SortableColumns.gif" alt="Sortable Columns" caption="Sortable Columns" title="Camunda BPM Cockpit" >}}
 
 ### User Operation Log
 
-* shows who executed which kind of operation
+User operation log both in process definition and in process instance view is now showing the user, who executed the specific operation.
+
+{{< figure class="main teaser no-border" src="cockpit-user-operations.png">}} 
 
 
 <!-- FEATURES EXPLANATIONS END -->
 
 ## Much more
 
-There are many more smaller features and bugfixes in the release which aren't presented here in the blogpost. The [full release notes](TODO) provide the details.
+There are many more smaller features and bugfixes in the release which aren't presented here in the blogpost. The [full release notes](https://app.camunda.com/jira/secure/ReleaseNote.jspa?projectId=10230&version=15096) provide the details.
 
 ## Register for the Webinar
 
