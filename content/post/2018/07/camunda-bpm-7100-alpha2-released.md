@@ -11,8 +11,8 @@ The second alpha release of **Camunda BPM 7.10** is here and the highlights are:
 
 * Cascading History Cleanup based on process hierarchy
 * Notable Security fixes
-* Feature 3
-* Feature 4
+* Start process list changes in Tasklist
+* Modify Single process asynchronously
 * More support enviorments - PostgreSQL 10.4 and MariaDB 10.3
 * [## Bug Fixes](https://app.camunda.com/jira/issues/?jql=issuetype%20%3D%20%22Bug%20Report%22%20AND%20fixVersion%20%3D%207.10.0-alpha1)
 
@@ -57,9 +57,21 @@ The definition of different patterns for User, Group and Tenant IDs is possible 
 
 Note that if a certain pattern isn't defined (ex. the tenant whitelist pattern), the general pattern will be used, either the default one (`"[a-zA-Z0-9]+|camunda-admin"`) or one defined in the configuration file.
 
-## Feature 3
+## Start process list changes in Tasklist
 
-## Feature 4
+In the [previous alpha](https://blog.camunda.com/post/2018/06/camunda-bpm-7100-alpha1-released/) we introduced a new query option "startable" for process definitions. This alpha the `Start process` list process definitions in Tasklist respect this query option and display only the "startable" process definitions. Together with that the user needs the following permissions to see a process definition in this list and of course start one:
+
+* `CREATE` permission for all Process instances
+* `CREATE_INSTANCE` and `READ` permission on Process definition level
+
+## Modify Single process asynchronously
+
+The latest feature in Cockpit is asynchronous modification of single process instace.
+Open Cockpit and navigate to the Runtime view of desired process instance. Choose which modification to perform. The asynchronous check box is in the Review modification window.
+
+{{< figure src="cockpit-modification-review.png">}}
+
+When proceed, a new job will be created and executed asynchronously.
 
 <!-- notable features & fixes - end -->
 
