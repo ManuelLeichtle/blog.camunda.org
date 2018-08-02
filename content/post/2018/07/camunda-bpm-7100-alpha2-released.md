@@ -14,7 +14,7 @@ The second alpha release of **Camunda BPM 7.10** is here and the highlights are:
 * Start process list changes in Tasklist
 * Modify Single process asynchronously
 * More support enviorments - PostgreSQL 10.4 and MariaDB 10.3
-* [## Bug Fixes](https://app.camunda.com/jira/issues/?jql=issuetype%20%3D%20%22Bug%20Report%22%20AND%20fixVersion%20%3D%207.10.0-alpha2)
+* [18 Bug Fixes](https://app.camunda.com/jira/issues/?jql=issuetype%20%3D%20%22Bug%20Report%22%20AND%20fixVersion%20%3D%207.10.0-alpha2)
 
 You can <a href="https://camunda.com/download/">Download Camunda for free</a> (click on Preview Release) or <a href="https://hub.docker.com/r/camunda/camunda-bpm-platform/">Run it with Docker</a>.
 
