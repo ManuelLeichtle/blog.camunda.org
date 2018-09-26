@@ -27,7 +27,7 @@ If you want to dig in deeper, you can find the source code on [GitHub](https://g
 BPMN diagrams in Cockpit are rendered and displayed by the [bpmn.js toolkit](https://bpmn.io/toolkit/bpmn-js/). Bpmn.js 
 can be extended with additional modules as well as so called moddle extensions. 
 
-An additional module refers to the extension of the feature set, wheareas a moddle extension makes it possible to add custom 
+An additional module refers to the extension of the feature set, whereas a moddle extension makes it possible to add custom 
 attributes and elements to the BPMN 2.0 model.
 
 Starting with this release, it is possible to use the extension mechanism of bpmn.js through Camunda Cockpit to customize 
@@ -58,21 +58,16 @@ and [bpmn.js](https://bpmn.io/toolkit/bpmn-js/walkthrough/#extend-the-modeler).
 Camunda BPM is now on the cutting-edge of Java since this release brings support for Java 9 & 10 as well as for Java 11 
 – which has been released just a few days ago.
 
-## Next Steps…
-As usual the fourth alpha release is scheduled for the end of the next month and we are already working on it.
+## What's Next?
 
-Among other things, we are working on the following topics, which are planned to be released in one of the next alpha releases:
-
-* Support of latest Wildfly version
-* bpmn-js plugins are available in Cockpit
-
-To get a complete overview of already implemented and planned features, please take a look at the [roadmap](https://camunda.com/learn/community/#roadmap) for the bigger list of planned features.
+The next alpha version is scheduled for the end of October and our team is already working on it.
 
 The minor release of **Camunda BPM 7.10** is coming this fall (November 30, 2018).
 
-## Your Feedback Is Highly Appreciated!
+You can find out more details if you check out our [roadmap](https://camunda.com/learn/community/#roadmap).
 
-With every release we constantly strive to improve **Camunda BPM**. To make this possible, we rely on your feedback.
-Feel free to share your ideas and suggestions with us.
+## Your Feedback Matters!
+
+With every release we constantly strive to improve Camunda BPM. To make this possible, we are reliant on your feedback. Feel free to share your ideas and suggestions with us.
 
 You can contact us by writing a post in the [forum](https://forum.camunda.org/).
